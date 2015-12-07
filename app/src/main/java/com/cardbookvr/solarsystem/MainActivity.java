@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.cardbookvr.renderbox.IRenderBox;
 import com.cardbookvr.renderbox.RenderBox;
 import com.cardbookvr.renderbox.Transform;
+import com.cardbookvr.renderbox.components.Cube;
 import com.google.vrtoolkit.cardboard.CardboardActivity;
 import com.google.vrtoolkit.cardboard.CardboardView;
 
@@ -29,7 +30,8 @@ public class MainActivity extends CardboardActivity implements IRenderBox {
     @Override
     public void setup() {
         Transform cube = new Transform();
-        cube.setLocalPosition(1.0f, 1.0f, -10.0f);
+        cube.setLocalPosition(1.0f, 1.0f, 10.0f);
+        cube.addComponent(new Cube());
     }
 
     @Override

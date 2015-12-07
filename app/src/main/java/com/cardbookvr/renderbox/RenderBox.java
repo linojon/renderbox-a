@@ -9,6 +9,7 @@ import com.cardbookvr.renderbox.components.Camera;
 import com.cardbookvr.renderbox.components.Cube;
 import com.cardbookvr.renderbox.components.RenderObject;
 import com.cardbookvr.renderbox.materials.SolidColorMaterial;
+import com.cardbookvr.renderbox.materials.VertexColorLightingMaterial;
 import com.google.vrtoolkit.cardboard.CardboardView;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
@@ -67,7 +68,10 @@ public class RenderBox implements CardboardView.StereoRenderer {
     public void onSurfaceCreated(EGLConfig eglConfig) {
         GLES20.glClearColor(0.1f, 0.1f, 0.1f, 0.5f);
         Cube.allocateBuffers();
+        //NOTE: When you add a material, don't forget to add its setup step
+        //Failure to do so will likely result in a glError 1281 or 1282
         SolidColorMaterial.setupProgram();
+        VertexColorLightingMaterial.setupProgram();
         checkGLError("onSurfaceCreated");
         callbacks.setup();
     }

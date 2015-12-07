@@ -2,6 +2,7 @@ package com.cardbookvr.renderbox.components;
 
 import com.cardbookvr.renderbox.materials.Material;
 import com.cardbookvr.renderbox.materials.SolidColorMaterial;
+import com.cardbookvr.renderbox.materials.VertexColorLightingMaterial;
 
 import java.nio.FloatBuffer;
 
@@ -18,10 +19,12 @@ public class Cube extends RenderObject {
     }
 
     public void createSolidColorMaterial(float[] color){
-        SolidColorMaterial scm = new SolidColorMaterial(color);
+        VertexColorLightingMaterial vcm = new VertexColorLightingMaterial();
+        vcm.setBuffers(cubeVertices,cubeColors,cubeNormals, 36);
+        //SolidColorMaterial scm = new SolidColorMaterial(color);
         // !!! PROBLEM IS HERE
         //scm.setBuffers(vertexBuffer, indexBuffer, numIndices);
-        material = scm;
+        material = vcm;
     }
     public static void allocateBuffers(){
         cubeVertices = allocateFloatBuffer(Cube.CUBE_COORDS);
