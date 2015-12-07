@@ -1,6 +1,7 @@
 package com.cardbookvr.renderbox.components;
 
 import com.cardbookvr.renderbox.materials.Material;
+import com.cardbookvr.renderbox.materials.SolidColorMaterial;
 
 import java.nio.FloatBuffer;
 
@@ -13,12 +14,19 @@ public class Cube extends RenderObject {
 
     public Cube(){
         super();
+        createSolidColorMaterial(new float[]{0.5f, 0.5f, 0.5f, 1});
     }
 
+    public void createSolidColorMaterial(float[] color){
+        SolidColorMaterial scm = new SolidColorMaterial(color);
+        // !!! PROBLEM IS HERE
+        //scm.setBuffers(vertexBuffer, indexBuffer, numIndices);
+        material = scm;
+    }
     public static void allocateBuffers(){
         cubeVertices = allocateFloatBuffer(Cube.CUBE_COORDS);
-        cubeColors = allocateFloatBuffer(Cube.CUBE_COLORS_FACES);
-        cubeNormals = allocateFloatBuffer(Cube.CUBE_NORMALS_FACES);
+        cubeColors = allocateFloatBuffer(Cube.cubeFacesToArray(Cube.CUBE_COLORS_FACES, 4));
+        cubeNormals = allocateFloatBuffer(Cube.cubeFacesToArray(Cube.CUBE_NORMALS_FACES, 3));
     }
 
     @Override
@@ -115,15 +123,6 @@ public class Cube extends RenderObject {
             0.0f, 1.0f, 0.0f,
             // Bottom face
             0.0f, -1.0f, 0.0f,
-    };
-
-    public static final float[] FLOOR_COLORS = new float[] {
-            0.0f, 0.3398f, 0.9023f, 1.0f,
-            0.0f, 0.3398f, 0.9023f, 1.0f,
-            0.0f, 0.3398f, 0.9023f, 1.0f,
-            0.0f, 0.3398f, 0.9023f, 1.0f,
-            0.0f, 0.3398f, 0.9023f, 1.0f,
-            0.0f, 0.3398f, 0.9023f, 1.0f,
     };
 
     /**
