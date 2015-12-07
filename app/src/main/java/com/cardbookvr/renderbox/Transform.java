@@ -1,7 +1,11 @@
 package com.cardbookvr.renderbox;
 
+import com.cardbookvr.renderbox.components.Component;
 import com.cardbookvr.renderbox.math.Matrix4;
 import com.cardbookvr.renderbox.math.Vector3;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jonathan on 12/6/2015.
@@ -14,6 +18,15 @@ public class Transform {
     private Vector3 localScale = new Vector3(1,1,1);
 
     private Transform parent = null;
+
+	List<Component> components = new ArrayList<Component>();
+
+    public void addComponent(Component component){
+        component.transform = this;
+    }
+    public List<Component> getComponents(){
+        return components;
+    }
 
     /*==================
     PARENT METHODS
